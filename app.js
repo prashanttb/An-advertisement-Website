@@ -14,6 +14,21 @@ const { type } = require('os')
 const { Client } = require('pg')
 
 
+const ensureAuth = (req,res,next)=>{
+    if(req.session.isAuth){
+        next();
+    }else{
+        res.redirect('/userlogin')
+    }
+}
+
+const ensureGuest = (req,res,next)=>{
+    if(req.session.isAuth){
+        res.redirect('/users/profile')
+    }else{
+        return next()
+    }
+}
 
 // const imgUpload = multer({
 //     dest:'./public/img',
@@ -128,7 +143,7 @@ app.post('/',async (req,res)=>{
 })
 
 // login
-app.get('/users/login',(req,res)=>{
+app.get('/users/login',ensureGuest,(req,res)=>{
     res.render('login')
 })
 
@@ -165,7 +180,7 @@ app.post('/users/login',async (req,res)=>{
 // })
 
 // register
-app.get('/users/register',(req,res)=>{
+app.get('/users/register',ensureGuest,(req,res)=>{
     res.render('register')
 })
 
@@ -210,13 +225,13 @@ app.post('/users/register', async(req,res)=>{
 })
 
 // profile
-app.get('/users/profile',(req,res)=>{
+app.get('/users/profile', ensureAuth,(req,res)=>{
     // console.log(req.session.user)
     res.render('profile',{user:req.session.user})
 })
 
 // cart
-app.get('/users/cart',async(req,res)=>{
+app.get('/users/cart',ensureAuth,async(req,res)=>{
     var result = await pool.query('select * from product p where p.id in (select c.productid from cart c where c.userid = $1);',[req.session.user.id])
     result=result.rows
     // console.log(result)
@@ -230,7 +245,7 @@ app.post('/remove',async(req,res)=>{
 })
 
 // show my ads
-app.get('/users/ad',async (req,res)=>{
+app.get('/users/ad',ensureAuth,async (req,res)=>{
 
     var result = await pool.query('SELECT * FROM product WHERE sellerid=$1;',[req.session.user.id])
     result = result.rows
@@ -248,7 +263,7 @@ app.post('/product',async(req,res)=>{
 })
 
 // add product to cart
-app.post('/addtocart',async (req,res)=>{
+app.post('/addtocart', ensureAuth,async (req,res)=>{
     var id = req.body.id
     var date = new Date().toISOString().slice(0,19).replace('T',' ')
     
@@ -277,18 +292,18 @@ app.get('/users/logout',async (req,res)=>{
 })
 
 // put ad page
-app.get('/styl',(req,res)=>{
+app.get('/styl',ensureAuth,(req,res)=>{
     res.render('prodV',{type:false})
 })
 
 //  ad style
-app.post('/styl',(req,res)=>{
+app.post('/styl',ensureAuth,(req,res)=>{
     var type = req.body.type
     res.render('prodV',{type})
 })
 
 // post ad
-app.post('/adstyle', videoUpload.fields([{name:'vid', maxCount:2},{name:'avatar',maxCount:4}]),async(req,res)=>{
+app.post('/adstyle',ensureAuth, videoUpload.fields([{name:'vid', maxCount:2},{name:'avatar',maxCount:4}]),async(req,res)=>{
     var name = req.body.pname
     var desc = req.body.desc
     var categ = req.body.categ
@@ -339,7 +354,7 @@ app.post('/adstyle', videoUpload.fields([{name:'vid', maxCount:2},{name:'avatar'
 })
 
 // delete product's ad
-app.post('/delAd',async(req,res)=>{
+app.post('/delAd',ensureAuth,async(req,res)=>{
     var result = await pool.query('DELETE FROM product WHERE id = $1',[req.body.id]);
     res.redirect('/users/ad')
 })
