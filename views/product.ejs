@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('partials/header.ejs') %>
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+<body>
+    <%- include('partials/nav2.ejs') %>
+
+
+    
+    <div class="content text-center" >
+        <% if(result.type === "normal"){ %>
+        <div class="normal" >
+            <div >
+                <img src="<%= result.image[0] %>" class="rounded mx-auto d-block" alt="..." >
+            </div>
+            <div >
+                <img src="<%= result.image[1] %>" class="rounded mx-auto d-block" alt="..." >
+            </div>
+            <div >
+                <img src="<%= result.image[2] %>" class="rounded mx-auto d-block" alt="..." >
+            </div>
+            <div >
+                <img src="<%= result.image[3] %>" class="rounded mx-auto d-block" alt="..." >
+            </div>
+        </div>
+        <h2 style="margin-top: 5%;">Name: <%= result.name %></h2>
+        <h2>Category: <%= result.category %></h2>
+        <h2>Description: <%= result.description %></h2>
+        <h2>Price: <%= result.price %></h2>
+        <h2>Seller details:</h2>
+        <h2><a href="mailto:<%= result.email %>"><%= result.email %></a></h2>
+        <h2><a href="tel:<%= result.phone %>"><%= result.phone %></a></h2>
+
+        <form action="/addtocart" method="POST">
+            <input type="hidden" name="id" value="<%= result.id %>"> 
+            <button class="btn btn-success" type="submit">Add to cart</button>
+        </form>
+
+        <% }else if(result.type === "mix"){ %>
+            <div class="mix">
+                <div class="col">
+                    <img src="<%= result.image[0] %>" class="rounded mx-auto d-block" alt="..." style="height: 300px;width: 300px;">
+                </div>
+                <div class="col">
+                    <img src="<%= result.image[1] %>" class="rounded mx-auto d-block" alt="..." style="height: 300px;width: 300px;">
+                </div>
+                <div class="col">
+                    <video src="<%= result.image[2] %>" style="height: 300px;width: 300px;" controls autoplay></video>
+                </div>
+                <div class="col">
+                    <video src="<%= result.image[3] %>" alt="..." style="height: 300px;width: 300px;" onclick="this.play()" ondblclick="this.pause()">
+                </div>
+            </div>
+            <h2>Name: <%= result.name %></h2>
+            <h2>Category: <%= result.category %></h2>
+            <h2>Description: <%= result.description %></h2>
+            <h2>Price: <%= result.price %></h2>
+            <h2>Seller details:</h2>
+        <h2><a href="mailto:<%= result.email %>"><%= result.email %></a></h2>
+        <h2><a href="tel:<%= result.phone %>"><%= result.phone %></a></h2>
+    
+            <form action="/addtocart" method="POST">
+                <input type="hidden" name="id" value="<%= result.id %>"> 
+                <button class="btn btn-success" type="submit">Add to cart</button>
+            </form>
+            <% }else if(result.type === "overlay" || result.type === "popup" || result.type === "sliding"){ %>
+                <div class="row">
+                    <div class="col">
+
+                    </div>
+                    <div class="col">
+                        <img src="<%= result.image[0] %>" class="rounded mx-auto d-block" alt="..." style="height: 300px;width: 300px;">
+                    </div>
+                    <div class="col">
+
+                    </div>
+                    
+                </div>
+                <h2>Name: <%= result.name %></h2>
+                <h2>Category: <%= result.category %></h2>
+                <h2>Description: <%= result.description %></h2>
+                <h2>Price: <%= result.price %></h2>
+                <h2>Seller details:</h2>
+        <h2><a href="mailto:<%= result.email %>"><%= result.email %></a></h2>
+        <h2><a href="tel:<%= result.phone %>"><%= result.phone %></a></h2>
+        
+                <form action="/addtocart" method="POST">
+                    <input type="hidden" name="id" value="<%= result.id %>"> 
+                    <button class="btn btn-success" type="submit">Add to cart</button>
+                </form>
+                <%}%>
+    </div>
+
+
+
+    
+
+
+
+</body>
+</html>

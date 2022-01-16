@@ -1,0 +1,42 @@
+.normal{
+    display:grid;
+    grid-template-columns:25% 25% 25% 25%;
+}
+
+img{
+    width: 90%;
+}
+
+.mix{
+    display:grid;
+    grid-template-columns:25% 25% 25% 25%;
+}
+
+.mix .col img, video{
+    max-width: 90%;
+}
+
+@media (min-width:320px) and (max-device-width : 480px)  { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ 
+
+    .normal{
+        display:grid;
+        grid-template-columns:50% 50%;
+        grid-row-gap: 5%;
+    }
+
+    img{
+        width: 90%;
+    }
+
+    .mix{
+        display:grid;
+        grid-template-columns:50% 50%;
+    }
+
+    .mix .col img, video{
+        max-width: 90%;
+    }
+
+    
+
+}

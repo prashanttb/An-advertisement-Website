@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .form-label{
+            font-size: 30px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell</title>
+    <link rel="stylesheet" href="css/sell.css">
+
+  <%- include('partials/header.ejs') %>
+</head>
+<body>
+    <%- include('partials/nav2.ejs') %>
+
+<section id="contact" style="margin-top: 5%;">
+    <div class="container-lg" >
+        <div class="text-center">
+            <h2>Start Selling</h2>
+        </div>
+        <div class="row justify-content-center my-5" >
+            <div class="col-lg-6">
+                <form action="/styl" method="POST">
+                    <label class="form-label" for="type">Select the type of ad you want to publish</label><br>
+                
+                    <select class="form-select" name="type" id="">
+                    <option value="normal">Normal</option>
+                    <option value="sliding">Sliding Image</option>
+                    <option value="mix">Image Video mix</option>
+                    <option value="popup">Pop up</option>
+                    <option value="overlay">Overlay</option>
+                    <option value="movtxt">Moving Text</option>
+                    </select>
+                    
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>  
+</section>
+<% if(type){ %>
+
+    <% if(type=="sliding"){ %>
+<!-- sliding img -->
+<section id="contact" style="margin-top: 5%;">
+    <div class="container-lg" >
+        <div class="text-center">
+            <h2>Sliding Image</h2>
+        </div>
+        <div class="row justify-content-center my-5" >
+            <div class="col-lg-6">
+                <form action="/adstyle" method="POST" enctype="multipart/form-data">
+                    <h3>Include Some Details</h3>
+                    <label class="form-label" for="pname">Product Name:</label class="form-label"><br>
+                    <input class="form-control" type="text" name="pname"><br>
+            
+                    <label class="form-label" for="desc">Description</label class="form-label"><br>
+                    <input class="form-control" type="text" name="desc"><br>
+            
+                    <label class="form-label" for="categ" value="">Category</label class="form-label"><br>
+                    <input class="form-check-input" type="radio" name="categ" value="Autos" id="">Autos
+                    <input class="form-check-input" type="radio" name="categ" value="Mobiles" id="">Mobiles
+                    <input class="form-check-input" type="radio" name="categ" value="Electronic Appliances" id="">Electronic Appliances
+                    <input class="form-check-input" type="radio" name="categ" value="Furniture" id="">Furniture
+                    <input class="form-check-input" type="radio" name="categ" value="FMCG" id="">FMCG
+                    <input class="form-check-input" type="radio" name="categ" value="Book and Sports" id="">Books, Toys and Sports
+                    <input class="form-check-input" type="radio" name="categ" value="Properties" id="">Properties
+                    <input class="form-check-input" type="radio" name="categ" value="Pets" id="">Pets
+                    <br>
+            
+                    <label class="form-label" for="price">Price:</label class="form-label"><br>
+                    <input class="form-control" type="text" name="price" id=""><br>
+            
+                    <label class="form-label" for="imgs">Upload Images</label class="form-label"><br>
+                    <input class="form-control" type="file" name="avatar" id="" required>
+                    <!-- <input class="form-control" type="file" name="avatar" id="" required>
+                    <label class="form-label" for="vid">Upload Videos</label class="form-label"><br>
+                    <input class="form-control" type="file" name="vid" id="" required>
+                    <input class="form-control" type="file" name="vid" id="" required><br> -->
+                    <input type="hidden" name="type" value="<%= type %>">
+                    <button class="btn btn-success" type="submit">Post</button>
+            
+                    
+            
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<% }else if(type == "movtxt"){ %>
+
+<!-- movtxt -->
+<section id="contact" style="margin-top: 5%;">
+    <div class="container-lg" >
+        <div class="text-center">
+            <h2>Moving Text</h2>
+        </div>
+        <div class="row justify-content-center my-5" >
+            <div class="col-lg-6">
+                <form action="/adstyle" method="POST" enctype="multipart/form-data">
+                    <h3>Include Some Details</h3>
+                    <label class="form-label" for="pname">Product Name:</label class="form-label"><br>
+                    <input class="form-control" type="text" name="pname"><br>
+            
+                    <label class="form-label" for="desc">Description</label class="form-label"><br>
+                    <input class="form-control" type="text" name="desc"><br>
+            
+                    <label class="form-label" for="categ" value="">Category</label class="form-label"><br>
+                    <input class="form-check-input" type="radio" name="categ" value="Autos" id="">Autos
+                    <input class="form-check-input" type="radio" name="categ" value="Mobiles" id="">Mobiles
+                    <input class="form-check-input" type="radio" name="categ" value="Electronic Appliances" id="">Electronic Appliances
+                    <input class="form-check-input" type="radio" name="categ" value="Furniture" id="">Furniture
+                    <input class="form-check-input" type="radio" name="categ" value="FMCG" id="">FMCG
+                    <input class="form-check-input" type="radio" name="categ" value="Book and Sports" id="">Books, Toys and Sports
+                    <input class="form-check-input" type="radio" name="categ" value="Properties" id="">Properties
+                    <input class="form-check-input" type="radio" name="categ" value="Pets" id="">Pets
+                    <br>
+            
+                    <label class="form-label" for="price">Price:</label class="form-label"><br>
+                    <input class="form-control" type="text" name="price" id=""><br>
+            
+                    <!-- <label class="form-label" for="imgs">Upload Images</label class="form-label"><br>
+                    <input class="form-control" type="file" name="avatar" id="" required>
+                    <input class="form-control" type="file" name="avatar" id="" required>
+                    <label class="form-label" for="vid">Upload Videos</label class="form-label"><br>
+                    <input class="form-control" type="file" name="vid" id="" required>
+                    <input class="form-control" type="file" name="vid" id="" required><br> -->
+                    <input type="hidden" name="type" value="<%= type %>">
+                    <button class="btn btn-success" type="submit">Post</button>
+            
+                    
+            
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<% }else if(type == "overlay"){ %>
+
+<!-- overlay -->
+<section id="contact" style="margin-top: 5%;">
+    <div class="container-lg" >
+        <div class="text-center">
+            <h2>Overlay ad</h2>
+        </div>
+        <div class="row justify-content-center my-5" >
+            <div class="col-lg-6">
+                <form action="/adstyle" method="POST" enctype="multipart/form-data">
+                    <h3>Include Some Details</h3>
+                    <label class="form-label" for="pname">Product Name:</label class="form-label"><br>
+                    <input class="form-control" type="text" name="pname"><br>
+            
+                    <label class="form-label" for="desc">Description</label class="form-label"><br>
+                    <input class="form-control" type="text" name="desc"><br>
+            
+                    <label class="form-label" for="categ" value="">Category</label class="form-label"><br>
+                    <input class="form-check-input" type="radio" name="categ" value="Autos" id="">Autos
+                    <input class="form-check-input" type="radio" name="categ" value="Mobiles" id="">Mobiles
+                    <input class="form-check-input" type="radio" name="categ" value="Electronic Appliances" id="">Electronic Appliances
+                    <input class="form-check-input" type="radio" name="categ" value="Furniture" id="">Furniture
+                    <input class="form-check-input" type="radio" name="categ" value="FMCG" id="">FMCG
+                    <input class="form-check-input" type="radio" name="categ" value="Book and Sports" id="">Books, Toys and Sports
+                    <input class="form-check-input" type="radio" name="categ" value="Properties" id="">Properties
+                    <input class="form-check-input" type="radio" name="categ" value="Pets" id="">Pets
+                    <br>
+            
+                    <label class="form-label" for="price">Price:</label class="form-label"><br>
+                    <input class="form-control" type="text" name="price" id=""><br>
+            
+                    <label class="form-label" for="imgs">Upload Images</label class="form-label"><br>
+                    <input class="form-control" type="file" name="avatar" id="" required>
+                    <!-- <input class="form-control" type="file" name="avatar" id="" required>
+                    <label class="form-label" for="vid">Upload Videos</label class="form-label"><br>
+                    <input class="form-control" type="file" name="vid" id="" required>
+                    <input class="form-control" type="file" name="vid" id="" required><br> -->
+                    <input type="hidden" name="type" value="<%= type %>">
+                    <button class="btn btn-success" type="submit">Post</button>
+            
+                    
+            
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<% }else if(type == "popup"){ %>
+
+<!-- popup -->
+<section id="contact" style="margin-top: 5%;">
+    <div class="container-lg" >
+        <div class="text-center">
+            <h2>Popup ad</h2>
+        </div>
+        <div class="row justify-content-center my-5" >
+            <div class="col-lg-6">
+                <form action="/adstyle" method="POST" enctype="multipart/form-data">
+                    <h3>Include Some Details</h3>
+                    <label class="form-label" for="pname">Product Name:</label class="form-label"><br>
+                    <input class="form-control" type="text" name="pname"><br>
+            
+                    <label class="form-label" for="desc">Description</label class="form-label"><br>
+                    <input class="form-control" type="text" name="desc"><br>
+            
+                    <label class="form-label" for="categ" value="">Category</label class="form-label"><br>
+                    <input class="form-check-input" type="radio" name="categ" value="Autos" id="">Autos
+                    <input class="form-check-input" type="radio" name="categ" value="Mobiles" id="">Mobiles
+                    <input class="form-check-input" type="radio" name="categ" value="Electronic Appliances" id="">Electronic Appliances
+                    <input class="form-check-input" type="radio" name="categ" value="Furniture" id="">Furniture
+                    <input class="form-check-input" type="radio" name="categ" value="FMCG" id="">FMCG
+                    <input class="form-check-input" type="radio" name="categ" value="Book and Sports" id="">Books, Toys and Sports
+                    <input class="form-check-input" type="radio" name="categ" value="Properties" id="">Properties
+                    <input class="form-check-input" type="radio" name="categ" value="Pets" id="">Pets
+                    <br>
+            
+                    <label class="form-label" for="price">Price:</label class="form-label"><br>
+                    <input class="form-control" type="text" name="price" id=""><br>
+            
+                    <label class="form-label" for="imgs">Upload Images</label class="form-label"><br>
+                    <input class="form-control" type="file" name="avatar" id="" required>
+                    <!-- <input class="form-control" type="file" name="avatar" id="" required>
+                    <label class="form-label" for="vid">Upload Videos</label class="form-label"><br>
+                    <input class="form-control" type="file" name="vid" id="" required>
+                    <input class="form-control" type="file" name="vid" id="" required><br> -->
+                    <input type="hidden" name="type" value="<%= type %>">
+                    <button class="btn btn-success" type="submit">Post</button>
+            
+                    
+            
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<% }else if(type == "normal"){ %>
+
+
+<!-- normal -->
+<section id="contact" style="margin-top: 5%;">
+    <div class="container-lg" >
+        <div class="text-center">
+            <h2>Normal Image ad</h2>
+        </div>
+        <div class="row justify-content-center my-5" >
+            <div class="col-lg-6">
+                <form action="/adstyle" method="POST" enctype="multipart/form-data">
+                    <h3>Include Some Details</h3>
+                    <label class="form-label" for="pname">Product Name:</label class="form-label"><br>
+                    <input class="form-control" type="text" name="pname"><br>
+            
+                    <label class="form-label" for="desc">Description</label class="form-label"><br>
+                    <input class="form-control" type="text" name="desc"><br>
+            
+                    <label class="form-label" for="categ" value="">Category</label class="form-label"><br>
+                    <input class="form-check-input" type="radio" name="categ" value="Autos" id="">Autos
+                    <input class="form-check-input" type="radio" name="categ" value="Mobiles" id="">Mobiles
+                    <input class="form-check-input" type="radio" name="categ" value="Electronic Appliances" id="">Electronic Appliances
+                    <input class="form-check-input" type="radio" name="categ" value="Furniture" id="">Furniture
+                    <input class="form-check-input" type="radio" name="categ" value="FMCG" id="">FMCG
+                    <input class="form-check-input" type="radio" name="categ" value="Book and Sports" id="">Books, Toys and Sports
+                    <input class="form-check-input" type="radio" name="categ" value="Properties" id="">Properties
+                    <input class="form-check-input" type="radio" name="categ" value="Pets" id="">Pets
+                    <br>
+            
+                    <label class="form-label" for="price">Price:</label class="form-label"><br>
+                    <input class="form-control" type="text" name="price" id=""><br>
+            
+                    <label class="form-label" for="imgs">Upload Images</label class="form-label"><br>
+                    <input class="form-control" type="file" name="avatar" id="" required>
+                    <input class="form-control" type="file" name="avatar" id="" required>
+                    <input class="form-control" type="file" name="avatar" id="" required>
+                    <input class="form-control" type="file" name="avatar" id="" required><br>
+                    <input type="hidden" name="type" value="<%= type %>">
+                    <button class="btn btn-success" type="submit">Post</button>
+            
+                    
+            
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<% }else if(type == "mix"){ %>
+
+    <!-- mix -->
+    <section id="contact" style="margin-top: 5%;">
+        <div class="container-lg" >
+            <div class="text-center">
+                <h2>Video Image mix ad</h2>
+            </div>
+            <div class="row justify-content-center my-5" >
+                <div class="col-lg-6">
+                    <form action="/adstyle" method="POST" enctype="multipart/form-data">
+                        <h3>Include Some Details</h3>
+                        <label class="form-label" for="pname">Product Name:</label class="form-label"><br>
+                        <input class="form-control" type="text" name="pname"><br>
+                
+                        <label class="form-label" for="desc">Description</label class="form-label"><br>
+                        <input class="form-control" type="text" name="desc"><br>
+                
+                        <label class="form-label" for="categ" value="">Category</label class="form-label"><br>
+                        <input class="form-check-input" type="radio" name="categ" value="Autos" id="">Autos
+                        <input class="form-check-input" type="radio" name="categ" value="Mobiles" id="">Mobiles
+                        <input class="form-check-input" type="radio" name="categ" value="Electronic Appliances" id="">Electronic Appliances
+                        <input class="form-check-input" type="radio" name="categ" value="Furniture" id="">Furniture
+                        <input class="form-check-input" type="radio" name="categ" value="FMCG" id="">FMCG
+                        <input class="form-check-input" type="radio" name="categ" value="Book and Sports" id="">Books, Toys and Sports
+                        <input class="form-check-input" type="radio" name="categ" value="Properties" id="">Properties
+                        <input class="form-check-input" type="radio" name="categ" value="Pets" id="">Pets
+                        <br>
+                
+                        <label class="form-label" for="price">Price:</label class="form-label"><br>
+                        <input class="form-control" type="text" name="price" id=""><br>
+                
+                        <label class="form-label" for="imgs">Upload Images</label class="form-label"><br>
+                        <input class="form-control" type="file" name="avatar" id="" required>
+                        <input class="form-control" type="file" name="avatar" id="" required>
+                        <label class="form-label" for="vid">Upload Videos</label class="form-label"><br>
+                        <input class="form-control" type="file" name="vid" id="" required>
+                        <input class="form-control" type="file" name="vid" id="" required><br>
+                        <input type="hidden" name="type" value="<%= type %>">
+                        <button class="btn btn-success" type="submit">Post</button>
+                
+                        
+                
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<% } %>
+<% }else{ %>
+
+    <div class="container">
+        <div class="text-center">
+
+            
+
+
+
+        </div>
+    </div>
+<% } %>
+
+
+    <!-- <div class="txt" style="display: flex; justify-content: center;"><h1><strong>Sell Your Product Here</strong></h1></div>
+    <div class="container">
+        <div class="card">
+            <h3>Include Some Details</h3>
+            <div class="name">
+                <h4>Product Name : </h4>
+                <input class="form-control" type="text" class="form-control" id="usr">
+                <hr color="black" size="10px" noshade>
+            </div>
+            <div class="desc">
+                <h4>Description : </h4>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+                <hr>
+            </div>
+            <div class="price">
+                <h4>Set Price : </h4>
+                <input class="form-control" type="text" class="form-control" id="usr">
+                <hr>
+            </div>
+            <div class="photos">
+                <h4>Upload upto 6 photos</h4>
+                <div class="pics">
+                    <div class="one">1</div>
+                    <div class="two">2</div>
+                    <div class="three">3</div>
+                    <div class="four">4</div>
+                    <div class="five">5</div>
+                    <div class="six">6</div>
+                </div>
+                <button style="margin-top: 20px;">Upload</button>
+                <hr>
+            </div>
+            <div class="contact">
+                <h4>Additional Contact Details</h4>
+                <br>
+                <h4>Additional Phone No : </h4>
+                <input class="form-control" type="text" class="form-control" id="usr">
+                <h4>Additional Email : </h4>
+                <input class="form-control" type="text" class="form-control" id="usr">
+                <button style="margin-top: 20px;">Post</button>
+            </div>
+
+        </div>
+    </div> -->
+    <%- include('partials/foot.ejs') %>
+</body>
+</html>
+
+
+
+
+
+

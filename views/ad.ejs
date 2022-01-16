@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home.css">
+    <title>Document</title>
+    <%- include('partials/header.ejs') %>
+    
+</head>
+<body>
+    
+
+      
+<%- include('partials/nav2.ejs') %>
+
+
+<div class="container">
+
+  <% for(var i = 0; i<result.length;i++){ %>
+    <div class="card" >
+        <img class="card-img-top" src="/<%= result[i].image[0] %>" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><%= result[i].name %></h5>
+          <p class="card-text"><%= result[i].description %></p>
+          <p class="card-text"><b>Ad type: <%= result[i].type %></b></p>
+          <p class="card-text"><b>Rs <%= result[i].price %></b></p>
+         
+          <form action="/product" method="POST">
+            <input type="hidden" name="id" value="<%= result[i].id %>">
+            <button class="btn btn-primary" type="submit">Visit Product</button>
+          </form>
+
+          <form action="/delAd" method="POST">
+            <input type="hidden" name="id" value="<%= result[i].id %>">
+            <button style="margin-top: 5px;" class="btn btn-primary" type="submit">Remove Product</button>
+          </form>
+
+        </div>
+      </div>
+      <% } %>
+
+      <!-- <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="img/a.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="img/a.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="img/a.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="img/a.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div> -->
+
+      <%- include('partials/foot.ejs') %>
+
+</div>
+
+</body>
+</html>

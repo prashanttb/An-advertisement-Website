@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('partials/header.ejs') %>
+    <title>Document</title>
+</head>
+<body>
+    <%- include('partials/nav.ejs') %>
+
+    <ul>
+        <% if(typeof errors!='undefined'){ %>
+            <% errors.forEach(error=>{ %>
+            <li><%= error.message %></li>
+            <% }) %>
+        <% } %>
+    </ul>
+
+
+    <section id="contact" style="margin-top: 5%;">
+        <div class="container-lg" >
+            <div class="text-center">
+                <h2>User Registration</h2>
+            </div>
+            <div class="row justify-content-center my-5" >
+                <div class="col-lg-6">
+                    <form action="/users/register" method="POST">
+                        <input class="form-control" type="text" id="name" name="name" placeholder="Name" required><br>
+                        <input class="form-control" type="email" name="email" id="email" placeholder="Email" required><br>
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Password" required><br>
+                        <input class="form-control" type="password" name="cpassword" id="cpassword" placeholder="Confirm Password" required><br>
+                        <input class="btn btn-primary" type="button" value="Get_my_Location" name="loc" class="loc" onclick="funct()">
+                        <input class="form-control" type="hidden" name="latitude" id="lat">
+                        <input class="form-control" type="hidden" name="longitude" id="lng">
+                        <button class="btn btn-success" type="submit">Register</button><br>
+                        <h3><a href="/users/login">Already registered? Login here</a></h3>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    
+    <script>
+
+        // document.querySelector('.loc').addEventListener("click",function(){
+        //     navigator.geolocation.getCurrentPosition(success,error)
+        //     function success(location){
+        //         document.getElementsById('lat').value = location.coords.latitude
+        //         document.getElementsById('lng').value = location.coords.longitude
+        //         console.log(location.coords.latitude)
+
+        //     }
+        //     function error(){}
+        // })
+
+        function funct(){
+            navigator.geolocation.getCurrentPosition(success,error)
+            function success(location){
+                document.getElementById("lat").value = location.coords.latitude
+                document.getElementById("lng").value = location.coords.longitude
+                // console.log(location.coords.latitude)
+
+            }
+            function error(){}
+        }
+   
+    </script>
+        <%- include('partials/foot.ejs') %>
+</body>
+</html>

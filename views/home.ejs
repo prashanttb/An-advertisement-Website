@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <%- include('partials/header.ejs') %>
+</head>
+<body>
+
+<% if(!auth){ %>
+<%- include('partials/nav.ejs') %>
+
+<% }else{ %>
+<%- include('partials/nav2.ejs') %>
+<div class="alert alert-success" role="alert">
+  <form action="/" method="POST">
+    <button type="submit" class="btn btn-success">Filter in My Location</button>
+  </form>
+</div>
+<% } %>
+
+<!-- Categories -->
+<div class="alert alert-success" role="alert">
+  <form action="/category" method="POST" id="cat">
+    <h5>Categories: 
+        <a href="#" onclick="document.getElementById('c').value = 'Autos'; document.getElementById('cat').submit();" >Auto</a>
+        <a href="#" onclick="document.getElementById('c').value='Mobiles'; document.getElementById('cat').submit();">Mobiles</a>
+        <a href="#" onclick="document.getElementById('c').value='Electronic Appliances'; document.getElementById('cat').submit();">Electronic Appliances</a>
+        <a href="#" onclick="document.getElementById('c').value='FMCG'; document.getElementById('cat').submit();">FMCG</a>
+        <a href="#" onclick="document.getElementById('c').value='Furniture'; document.getElementById('cat').submit();">Furniture</a>
+        <a href="#" onclick="document.getElementById('c').value='Book and Sports'; document.getElementById('cat').submit();">Books and Sports</a>
+        <a href="#" onclick="document.getElementById('c').value = 'Pets'; document.getElementById('cat').submit();">Pets</a>
+        <a href="#" onclick="document.getElementById('c').value = 'Properties'; document.getElementById('cat').submit();">Properties</a>
+        <a href="/">Home</a>
+    </h5>
+    <input type="hidden" name="category" id="c" value="">
+    <!-- <button type="submit" class="btn btn-success">Filter in My Location</button> -->
+  </form>
+</div>
+
+<!-- Big sliding img -->
+<div id="carouselExampleCaptions" class="carousel slide"  data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner" >
+    
+    <div class="carousel-item active">
+      <img src="/img/a.jpg"  class="d-block w-100" alt="..." style="height: 300px;">
+      <div class="carousel-caption d-none d-md-block">
+        <h1 style="color: black;">Welcome to our website</h1>
+        <p>Some representative placeholder content for the first slide.</p>
+      </div>
+    </div>
+      
+    <% for(var i = 0; i<result.length;i++){ %>
+      <% if(result[i].type === "sliding"){ %>
+    <div class="carousel-item">
+      <img src="/<%= result[i].image[0] %>" id="<result[i].name>" onclick="document.getElementById('<%= result[i].name %>').submit();" class="d-block w-100" alt="..."style="height: 300px;">
+      <div class="carousel-caption d-none d-md-block">
+        <h2 style="color: black;font-weight: bold;"><%= result[i].name %></h2>
+        <p style="color: black;font-weight:bold;font-size: 40px;"><%= result[i].description %></p>
+      </div>
+      <form action="/product" id="<%= result[i].name %>" method="POST">
+        <input type="hidden" name="id" value="<%= result[i].id %>">
+      </form>
+    </div>
+    <% } %>
+    <% } %>
+    <!-- <div class="carousel-item">
+      <img src="/img/a.jpg" class="d-block w-100" alt="..."style="height: 300px;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
+    </div> -->
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<!-- normal, sliding and mixed -->
+<div class="container">
+  <% for(var i = 0; i<result.length;i++){ %>
+    <% if(result[i].type == "normal" || result[i].type == "mix" || result[i].type == "sliding"){ %>
+    <div class="card">
+        <img class="card-img-top" src="/<%= result[i].image[0] %>" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><%= result[i].name %></h5>
+          <p class="card-text"><%= result[i].description %></p>
+          <p class="card-text"><b>Rs <%= result[i].price %></b></p>
+
+          <form action="/product" method="POST">
+            <input type="hidden" name="id" value="<%= result[i].id %>">
+            <button class="btn btn-primary" type="submit">Visit Product</button>
+          </form>
+
+        </div>
+      </div>
+      <% } %>
+    <% } %>
+
+      <!-- <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="img/a.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="img/a.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="img/a.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="img/a.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div> -->
+
+</div>
+
+<!-- Overlay ad -->
+<div class="overlay" id="hid">
+
+  <div id="carouselExampleCaption" class="carousel slide" data-bs-ride="carousel"  onmouseover="this.style.opacity=1" onmouseleave="this.style.opacity=.7" >
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      
+      <div class="carousel-item active" >
+        <img src="/img/a.jpg"  class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1 style="color: black;">Overlay Ads</h1>
+          <p>Some representative placeholder content for the first slide.</p>
+        </div>
+      </div>
+        
+      <% for(var i = 0; i<result.length;i++){ %>
+        <% if(result[i].type === "overlay"){ %>
+      <div class="carousel-item" >
+        <div class="ogrid">
+          <div class="image">
+            <img src="/<%= result[i].image[0] %>"alt="...">
+          </div>
+          <div class="txt">
+              <h3>Name: <%= result[i].name %></h3>
+              <h4>Description: <%= result[i].description %></h4>
+              <h3>Price: Rs <%= result[i].price %></h3>
+              <form action="/product" method="POST">
+                <input type="hidden" name="id" value="<%= result[i].id %>">
+                <button class="btn btn-primary" type="submit">Visit Product</button>
+              </form>
+              <button style="margin-top: 5px;" class="btn btn-primary" onclick="hide()">Hide</button>
+          </div>
+        </div>
+      </div>
+      <% } %>
+      <% } %>
+      <!-- <div class="carousel-item">
+        <img src="/img/a.jpg" class="d-block w-100" alt="..."style="height: 300px;">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Third slide label</h5>
+          <p>Some representative placeholder content for the third slide.</p>
+        </div>
+      </div> -->
+    </div>
+    <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button> -->
+  </div>
+
+  <!-- Moving Text -->
+  <marquee behavior="" direction=""><strong>Parker Pen, Cost: 500Rs, Upto 1L Words</strong></marquee>
+</div>
+
+
+
+
+<%- include('partials/foot.ejs') %>
+
+<script>
+  function hide(){
+    document.getElementById("hid").style.display="none";
+  }
+</script>
+
+</body>
+</html>

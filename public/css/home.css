@@ -1,0 +1,111 @@
+.container{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-gap: 1%;
+}
+
+.container .card{
+    width: 100%;
+}
+
+.container .card img{
+    max-height: 200px;
+    width:100%;
+}
+
+.container >* {
+    margin: 5%;
+}
+
+.alert a{
+    margin: 1%;
+}
+
+.overlay{
+    height: 25%;
+    width: 70%;
+    position: fixed;
+    top: 70%;
+    left: 15%;
+    opacity: .7;
+    background: #ccc;
+}
+
+.overlay:hover{
+    opacity: 1;
+} 
+
+.overlay .carousel-item{
+    height: 230px;
+}
+
+.overlay .carousel-item img{
+    height: 100%;
+    width:100%;
+    padding: 1%;
+}
+
+.ogrid{
+    display: grid; 
+    grid-template-columns: 25% 75%;
+}
+
+@media (min-width:320px) and (max-device-width : 480px)  { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ 
+
+    .container{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        font-size: small;
+        justify-items: center;
+    }
+
+    .container .card{
+        width: 100%;
+    }
+
+    .container .card img{
+        height: 150px;
+        width:100%;
+    
+    }
+
+    .alert a{
+        margin: 20px;
+    }
+
+    
+.overlay{
+    height: 25%;
+    width: 70%;
+    position: fixed;
+    top: 70%;
+    left: 15%;
+    opacity: .7;
+    background: #ccc;
+}
+
+.overlay:hover{
+    opacity: 1;
+} 
+
+.overlay .carousel-item{
+    height: 100%;
+}
+
+.overlay .carousel-item img{
+    /* height: 70%;
+    width: 70%; */
+    padding: 1%;
+}
+
+.ogrid{
+    display: grid; 
+    grid-template-columns: 25% 75%;
+}
+
+.txt h3{
+    font-size: 1%;
+}
+
+
+}

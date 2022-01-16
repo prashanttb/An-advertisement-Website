@@ -1,0 +1,37 @@
+
+.container{
+    display: flex;
+    justify-content: center;
+    height: 1450px;
+}
+
+.card{
+    width: 80%;
+    background:rgb(248, 1, 248);
+    display: grid;
+    grid-template-rows: repeat(8,1fr);
+    margin: 20px;
+    padding: 30px;
+    border-radius: 4px;
+}
+
+h3{
+    grid-row: 1/2;
+}
+
+.pics{
+    display: grid;
+    grid-template-rows: repeat(2,1fr);
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 10px;
+}
+.pics >*{
+    background: rgb(0, 171, 250);
+    height: 224px;
+    border-radius: 5px;
+}
+
+#usr{
+    width: 300px;
+}
+
